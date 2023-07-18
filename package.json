@@ -1,0 +1,27 @@
+{
+  "name": "hardhat-practise",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/0xfps/hardhat.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/0xfps/hardhat/issues"
+  },
+  "homepage": "https://github.com/0xfps/hardhat#readme",
+  "devDependencies": {
+    "hardhat": "^2.9.7"
+  },
+  "dependencies": {
+    "@gelatonetwork/relay-context": "^3.0.0",
+    "@gelatonetwork/relay-sdk": "^4.0.0",
+    "@nomicfoundation/hardhat-toolbox": "^3.0.0"
+  }
+}

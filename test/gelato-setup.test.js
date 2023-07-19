@@ -1,5 +1,5 @@
 const { ethers } = require("hardhat")
-const { GelatoRelay } = require("@gelatonetwork/relay-sdk")
+const relaySdk = require("@gelatonetwork/relay-sdk")
 
 let alice,
     bob,
@@ -49,9 +49,8 @@ describe("Setup StableToken and GelatoImplementer", async () => {
         }
 
         // The functions below all fail.
-        const relayResponse = await relayWithSyncFee(request)
-        // const relayResponse = await GelatoRelay.callWithSyncFee(request)
-        // const relayResponse = await GelatoRelay.relayWithSyncFee(request)
+        const relay = new relaySdk.GelatoRelay();
+        const relayResponse = await relay.callWithSyncFee(request);
 
         console.log(relayResponse)
     })

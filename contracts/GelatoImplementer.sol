@@ -9,6 +9,7 @@ contract GelatoImplementer is GelatoRelayContext {
     uint256 count;
 
     function increment() public onlyGelatoRelay {
+        _transferRelayFee();
         ++count;
     }
 

@@ -8,7 +8,7 @@ const provider = new ethers.JsonRpcProvider(`https://goerli.infura.io/v3/${proce
 
 const main = async () => {
     // Gelato implementer on Goerli.
-    const GelImp = "0x239C80DBcdAa1bdeEFd6a7f2bc4421020E092BD3"
+    const GelImp = "0xD17E6E1daB2d1E778278f5358ca68D572b713cdF"
 
     const { abi } = require("../artifacts/contracts/GelatoImplementer.sol/GelatoImplementer.json")
 
@@ -22,7 +22,7 @@ const main = async () => {
     const request = {
         chainId: 5, // Goerli.
         // GelatoImplementer address on Goerli
-        // https://goerli.etherscan.io/address/0x239C80DBcdAa1bdeEFd6a7f2bc4421020E092BD3
+        // https://goerli.etherscan.io/address/0xD17E6E1daB2d1E778278f5358ca68D572b713cdF
         target: GelImp,
         data: data,
         isRelayContext: true,

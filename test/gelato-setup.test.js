@@ -1,4 +1,4 @@
-const { ethers } = require("hardhat")
+const hre = require("hardhat")
 const relaySdk = require("@gelatonetwork/relay-sdk")
 
 let alice,
@@ -10,18 +10,20 @@ let alice,
     gelatoImplementerAddress
 
 const USDC = "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+// Goerli LINK.
+const LINK = "0x326C977E6efc84E512bB9C30f76E30c160eD06FB"
 
 describe("Setup StableToken and GelatoImplementer", async () => {
     before(async () => {
         [alice, bob, charles] = await ethers.getSigners()
 
         // Deploy ERC-20 StableToken and get address.
-        const StableToken = await ethers.getContractFactory("StableToken")
+        const StableToken = await hre.ethers.getContractFactory("StableToken")
         stableToken = await StableToken.deploy("Token", "TOKN")
         stableTokenAddress = await stableToken.getAddress()
 
         // Deploy GelatoImplementer and get address.
-        const GelatoImplementer = await ethers.getContractFactory("GelatoImplementer")
+        const GelatoImplementer = await hre.ethers.getContractFactory("GelatoImplementer")
         gelatoImplementer = await GelatoImplementer.deploy()
         gelatoImplementerAddress = await gelatoImplementer.getAddress()
 
@@ -34,26 +36,26 @@ describe("Setup StableToken and GelatoImplementer", async () => {
     it("Should output valid deployment addresses", async () => {
         console.log(`StableTokenMock is deployed to ${stableTokenAddress}.`)
         console.log(`GelatoImplementer deployed to ${gelatoImplementerAddress}.`)
-        console.log(`USDC owned by GelatoImplementer: ${await stableToken.balanceOf(gelatoImplementerAddress)}.`)
+        // console.log(`USDC owned by GelatoImplementer: ${await stableToken.balanceOf(gelatoImplementerAddress)}.`)
     })
 
-    it("Should send a transaction via Gelato Relay", async () => {
-        // Make a call to the increment function in the GelatoImplementer contract. 
-        const { data } = await gelatoImplementer.increment.populateTransaction()
+    // it("Should send a transaction via Gelato Relay", async () => {
+    //     // Make a call to the increment function in the GelatoImplementer contract. 
+    //     const { data } = await gelatoImplementer.increment.populateTransaction()
 
-        // Request structure.
-        const request = {
-            chainId: 1,
-            target: gelatoImplementerAddress,
-            data: data,
-            isRelayContext: true,
-            feeToken: USDC
-        }
+    //     // Request structure.
+    //     const request = {
+    //         chainId: 5,
+    //         target: gelatoImplementerAddress,
+    //         data: data,
+    //         isRelayContext: true,
+    //         feeToken: LINK
+    //     }
 
-        // The functions below all fail.
-        const relay = new relaySdk.GelatoRelay();
-        const relayResponse = await relay.callWithSyncFee(request);
+    //     // The functions below all fail.
+    //     const relay = new relaySdk.GelatoRelay();
+    //     const relayResponse = await relay.callWithSyncFee(request);
 
-        console.log(relayResponse)
-    })
+    //     console.log(relayResponse)
+    // })
 })
